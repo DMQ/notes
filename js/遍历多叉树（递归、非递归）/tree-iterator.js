@@ -42,7 +42,7 @@
 
 	//递归实现
 	var parseTreeJson = function(treeNodes){
-	   var treeNodes = treeNodes || {};
+	   if (!treeNodes || !treeNodes.length) return;
 
 	   for (var i = 0, len = treeNodes.length; i < len; i++) {
 
@@ -61,9 +61,9 @@
 
 	//非递归广度优先实现
 	var iterator1 = function (treeNodes) {
-		var stack = [];
-
 		if (!treeNodes || !treeNodes.length) return;
+
+		var stack = [];
 
 		//先将第一层节点放入栈
 		for (var i = 0, len = treeNodes.length; i < len; i++) {
@@ -95,9 +95,9 @@
 
 	//非递归深度优先实现
 	var iterator2 = function (treeNodes) {
-		var stack = [];
-
 		if (!treeNodes || !treeNodes.length) return;
+
+		var stack = [];
 
 		//先将第一层节点放入栈
 		for (var i = 0, len = treeNodes.length; i < len; i++) {
