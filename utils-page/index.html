@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>前端工具</title>
+	<link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+	<div class="row clearfix">
+		<div class="container clearfix">
+			<h1 class="title text-center">二维码</h1>
+			<div class="col-left">
+				<label>网址：</label>
+				<textarea class="link"></textarea>
+			</div>
+			<div class="col-right">
+				<label>二维码：</label>
+				<div id="qrcode-pic"></div>
+			</div>
+		</div>
+		<div class="container clearfix">
+			<h1 class="title text-center">图片生成Base64</h1>
+			<div class="settings clearfix">
+				<input type="file" id="file" />
+				<textarea class="drop-area" placeholder="或者拖图片到这里来" readonly></textarea>
+				<label><input type="checkbox" class="need-compress" /> 宽高压缩</label>
+				<label>宽: <input type="text" class="width-input" value="100" disabled> px</label>
+				<label>高: <input type="text" class="height-input" value="100" disabled> px</label>
+			</div>
+			<div class="result-wrap text-center">
+				<div class="title">
+					<span class="col">源文件大小</span>
+					<span class="col">缩略图</span>
+					<span class="col">Base64大小</span>
+					<span class="col">Base64 URL</span>
+				</div>
+				<div class="content">
+					<span class="col"></span>
+					<span class="col"><img src="" /></span>
+					<span class="col"></span>
+					<span class="col"><textarea></textarea></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="js/jquery.qrcode.min.js"></script>
+	<script src="js/pic-preview-base64-jq.js"></script>
+	<script src="js/index.js"></script>
+</body>
+</html>

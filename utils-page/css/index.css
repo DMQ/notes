@@ -1,0 +1,147 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: none;
+	font-size: 14px;
+	outline: none;
+}
+body{
+	background: #fff;
+}
+label{
+	vertical-align: top;
+}
+input[type="text"], textarea{
+	border: 1px solid #ccc;
+	padding: 4px 5px;
+}
+.text-center{
+	text-align: center;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clearfix{
+	zoom: 1;
+}
+.clearfix:after{
+	content: '';
+	display: block;
+	height: 0;
+	opacity: 0;
+	clear: both;
+}
+
+.row{
+	width: 900px;
+	margin: 0px auto;
+}
+
+.container{
+	padding: 50px 0 20px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.container:last-child{
+	border: none;
+}
+
+.title{
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.col-left{
+	width: 306x;
+	float: left;
+}
+.link{
+	width: 365px;
+	height: 150px;
+}
+.col-right{
+	width: 365px;
+	float: right;
+}
+#qrcode-pic{
+	width: 250px;
+	height: 250px;
+	display: inline-block;
+}
+
+/* 生成base64部分 */
+.settings{
+	line-height: 24px;
+}
+
+.settings label{
+	margin: 0 0 0 20px;
+}
+
+#file{
+	width: 200px;
+}
+
+.drop-area{
+	width: 280px;
+	height: 130px;
+	margin-right: 40px;
+	vertical-align: top;
+	border: 2px dashed #ddd;
+}
+
+.drop-area.drag-over{
+	border-color: #43E61C;
+}
+
+.need-compress{
+	vertical-align: -1px;
+}
+
+.width-input, .height-input{
+	width: 40px;
+}
+
+.result-wrap{
+	margin-top: 40px;
+	background-color: #7C797E;
+	border-radius: 4px;
+	color: #fff;
+	padding-bottom: 10px;
+}
+
+.result-wrap .title{
+	font-size: 0;
+	line-height: 40px;
+	padding: 0;
+	margin: 0;
+	font-weight: normal;
+}
+
+.result-wrap .col{
+	display: inline-block;
+	vertical-align: middle;
+	width: 20%;
+}
+
+.result-wrap .col:last-child{
+	width: 40%;
+}
+
+.result-wrap .content{
+	font-size: 0;
+}
+
+.result-wrap .content img{
+	max-width: 100%;
+}
+
+.result-wrap .content textarea{
+	width: 85%;
+	height: 180px;
+}
