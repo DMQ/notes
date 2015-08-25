@@ -21,11 +21,20 @@
 		<div class="container clearfix">
 			<h1 class="title text-center">图片生成Base64</h1>
 			<div class="settings clearfix">
-				<input type="file" id="file" />
-				<textarea class="drop-area" placeholder="或者拖图片到这里来" readonly></textarea>
-				<label><input type="checkbox" class="need-compress" /> 宽高压缩</label>
-				<label>宽: <input type="text" class="width-input" value="100" disabled> px</label>
-				<label>高: <input type="text" class="height-input" value="100" disabled> px</label>
+				<div class="fl file-group">
+					<input type="file" id="file" />
+					<textarea class="drop-area" placeholder="或者拖图片到这里来" readonly></textarea>
+				</div>
+				<div class="fl select-group">
+					<label><input type="checkbox" class="need-compress" /> 宽高压缩</label>
+					<label>宽: <input type="text" class="width-input" value="100" disabled> px</label>
+					<label>高: <input type="text" class="height-input" value="100" disabled> px</label>
+					<div class="image-type-group">
+						压缩图片格式：
+						<label><input type="radio" name="image-type" value="image/png" disabled>png</label>
+						<label><input type="radio" name="image-type" value="image/jpeg" disabled>jpg</label>
+					</div>
+				</div>
 			</div>
 			<div class="result-wrap text-center">
 				<div class="title">

@@ -74,13 +74,13 @@ input[type="text"], textarea{
 	display: inline-block;
 }
 
-/* 生成base64部分 */
+/*---------- 生成base64部分 ----------*/
 .settings{
 	line-height: 24px;
 }
 
-.settings label{
-	margin: 0 0 0 20px;
+.file-group{
+	width: 541px;
 }
 
 #file{
@@ -99,6 +99,19 @@ input[type="text"], textarea{
 	border-color: #43E61C;
 }
 
+.select-group{
+	width: 339px;
+	padding-left: 20px;
+}
+
+.select-group label{
+	margin: 0 0 0 20px;
+}
+
+.select-group label:first-child{
+	margin: 0;
+}
+
 .need-compress{
 	vertical-align: -1px;
 }
@@ -106,6 +119,17 @@ input[type="text"], textarea{
 .width-input, .height-input{
 	width: 40px;
 }
+
+.image-type-group{
+	padding: 20px 0 0 20px;
+}
+
+.image-type-group input[type="radio"]{
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+/*--------- 图片生成base64详情部分 --------*/
 
 .result-wrap{
 	margin-top: 40px;

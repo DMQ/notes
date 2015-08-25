@@ -60,30 +60,36 @@
 
 				if (compress) {
 					var width = $('.width-input').val(),
-						height = $('.height-input').val();
+						height = $('.height-input').val(),
+						imageType = $('input[name="image-type"]:checked').val();
 
 					previewObj.set({
 						'compress': true,
 						'compressWidth': width,
-						'compressHeight': height
+						'compressHeight': height,
+						'imageType': imageType
 					});
 				} else {
 					previewObj.set({
-						'compress': false
+						'compress': false,
+						'imageType': ''
 					});
 				}
 			},
 
 			compressCtrl: function () {
-				$('.settings').on('change', '.need-compress', function () {
+				var handler = function () {
 					var checked = $(this).prop('checked');
-					$('.width-input').prop('disabled', !checked);
-					$('.height-input').prop('disabled', !checked);
+					$('.select-group input').not('.need-compress').prop('disabled', !checked);
 
 					$('#file').data('picPreview').preview();
-				}).on('change', '.width-input, .height-input', function () {
-					$('#file').data('picPreview').preview();
-				});
+				};
+
+				$('.settings').on('change', '.need-compress', handler)
+							  .on('change', 'input[name="image-type"]', handler)
+							  .on('change', '.width-input, .height-input', function () {
+							  	  $('#file').data('picPreview').preview();
+							  });
 			}
 		}
 	};
