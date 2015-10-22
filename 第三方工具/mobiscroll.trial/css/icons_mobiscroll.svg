@@ -1,0 +1,41 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2015-10-22: Created.
+-->
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>
+Created by FontForge 20120731 at Thu Oct 22 10:18:43 2015
+ By root
+Created by root with FontForge 2.0 (http://fontforge.sf.net)
+</metadata>
+<defs>
+<font id="icons_mobiscroll" horiz-adv-x="236" >
+  <font-face 
+    font-family="icons_mobiscroll"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="512"
+    panose-1="2 0 6 3 0 0 0 0 0 0"
+    ascent="448"
+    descent="-64"
+    bbox="-0.25 -28.25 512 412.25"
+    underline-thickness="25.6"
+    underline-position="-51.2"
+    unicode-range="U+F100-F105"
+  />
+    <missing-glyph />
+    <glyph glyph-name="uniF101" unicode="&#xf101;" 
+d="M230 2c7 -7 7 -18 0 -25s-17 -7 -24 0l-201 202c-7 7 -7 19 0 26l201 202c7 7 17 7 24 0s7 -18 0 -25l-182 -190z" />
+    <glyph glyph-name="uniF100" unicode="&#xf100;" horiz-adv-x="440" 
+d="M30 305v0l190 -183l190 183c7 7 18 7 25 0s7 -18 0 -25l-202 -201c-7 -7 -18 -7 -25 0l-203 201c-7 7 -7 18 0 25s18 7 25 0z" />
+    <glyph glyph-name="uniF105" unicode="&#xf105;" horiz-adv-x="207" 
+d="M74 118c-2 -2 -6 -4 -9 -4s-7 2 -9 4l-56 56l18 18l47 -47l125 126l17 -18z" />
+    <glyph glyph-name="uniF104" unicode="&#xf104;" horiz-adv-x="512" 
+d="M432 384l80 -80l-320 -320l-192 192l80 80l112 -112z" />
+    <glyph glyph-name="uniF102" unicode="&#xf102;" 
+d="M5 2l183 190l-183 190c-7 7 -7 18 0 25s18 7 25 0l200 -202c7 -7 7 -19 0 -26l-200 -202c-7 -7 -18 -7 -25 0s-7 18 0 25z" />
+    <glyph glyph-name="uniF103" unicode="&#xf103;" horiz-adv-x="440" 
+d="M410 79v0l-190 183l-190 -183c-7 -7 -18 -7 -25 0s-7 18 0 25l203 201c7 7 18 7 25 0l202 -201c7 -7 7 -18 0 -25s-18 -7 -25 0z" />
+  </font>
+</defs></svg>

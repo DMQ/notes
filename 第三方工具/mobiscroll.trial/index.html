@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <title>Mobiscroll</title>
+
+    <!-- Zepto Include -->
+    <script src="http://zeptojs.com/zepto.min.js"></script>
+    
+    
+    <!-- Mobiscroll JS and CSS Includes -->
+    <link href="css/mobiscroll.custom-2.17.0.min.css" rel="stylesheet" type="text/css" />
+    <script src="js/mobiscroll.custom-2.17.0.min.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        /* Demo Page styling, you can ignore this in your implementation */
+        body { padding: 0; margin: 0; font-size: 16px; font-family: arial, verdana, sans-serif; }
+        input, select { width: 100%; padding: .625em; margin: 0 0 .625em 0; border: 1px solid #aaa; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
+        .header { padding: .625em; background: #5185a8;}
+        .header h1 { margin: 0; padding: 0; color: #fff; text-align: center; font-size: 1.25em; font-weight: bold; text-shadow: 1px 1px 1px #000; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+        .content { padding: 1em; } 
+    </style>
+
+    <script>
+        $(function () {
+
+            function init() {
+                
+                // Select demo initialization
+                $('#demo_select').mobiscroll().select({
+                    theme: theme,     // Specify theme like: theme: 'ios' or omit setting to use default 
+                    mode: mode,       // Specify scroller mode like: mode: 'mixed' or omit setting to use default 
+                    display: display, // Specify display mode like: display: 'bottom' or omit setting to use default 
+                    lang: lang        // Specify language like: lang: 'pl' or omit setting to use default 
+                });
+                
+                // Date demo initialization
+                $('#demo_date').mobiscroll().date({
+                    theme: theme,     // Specify theme like: theme: 'ios' or omit setting to use default 
+                    mode: mode,       // Specify scroller mode like: mode: 'mixed' or omit setting to use default 
+                    display: display, // Specify display mode like: display: 'bottom' or omit setting to use default 
+                    lang: lang        // Specify language like: lang: 'pl' or omit setting to use default 
+                });
+                
+                // Date & Time demo initialization
+                $('#demo_datetime').mobiscroll().datetime({
+                    theme: theme,     // Specify theme like: theme: 'ios' or omit setting to use default 
+                    mode: mode,       // Specify scroller mode like: mode: 'mixed' or omit setting to use default 
+                    display: display, // Specify display mode like: display: 'bottom' or omit setting to use default 
+                    lang: lang,       // Specify language like: lang: 'pl' or omit setting to use default
+                    minDate: new Date(2014,3,10,9,22),  // More info about minDate: http://docs.mobiscroll.com/2-17-0/datetime#!opt-minDate
+                    maxDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),   // More info about maxDate: http://docs.mobiscroll.com/2-17-0/datetime#!opt-maxDate
+                    stepMinute: 5  // More info about stepMinute: http://docs.mobiscroll.com/2-17-0/datetime#!opt-stepMinute
+                });
+                
+                // Time demo initialization
+                $('#demo_time').mobiscroll().time({
+                    theme: theme,     // Specify theme like: theme: 'ios' or omit setting to use default 
+                    mode: mode,       // Specify scroller mode like: mode: 'mixed' or omit setting to use default 
+                    display: display, // Specify display mode like: display: 'bottom' or omit setting to use default 
+                    lang: lang        // Specify language like: lang: 'pl' or omit setting to use default 
+                });
+                
+            }    
+
+            // -------------------------------------------------------------------
+            // Demo page code START, you can ignore this in your implementation
+            var demo, theme, mode, display, lang;
+            
+            $('.settings').on('change', function() {
+                demo = $('#demo').val();
+                theme = $('#theme').val() || $.mobiscroll.defaults.theme,
+                mode = $('#mode').val(),
+                display = $('#display').val(),
+                lang = $('#language').val();
+
+                $('.demo-cont').hide();
+                $("#demo_cont_" + demo).show();
+                
+                init();
+            });
+
+            $('#demo').trigger('change');
+            // Demo page code END
+            // -------------------------------------------------------------------
+        });
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Mobiscroll</h1>
+    </div>
+
+    <div class="content">
+        <!-- ------------------------------------------------------------------ -->
+        <!-- Demo configurator markup START, ignore this in your implementation -->
+        <div>
+            <label for="theme">Theme</label>
+            <select name="theme" id="theme" class="settings">
+                <option value="">Default / Auto</option>
+                <option value="mobiscroll">Mobiscroll</option>
+                <option value="ios">iOS</option>
+            </select>
+        </div>
+        <div>
+            <label for="mode">Mode</label>
+            <select name="mode" id="mode" class="settings">
+                <option value="scroller">Scroller</option>
+                <option value="clickpick">Clickpick</option>
+                <option value="mixed">Mixed</option>
+            </select>
+        </div>
+        <div>
+            <label for="display">Display</label>
+            <select name="display" id="display" class="settings">
+                <option value="modal">Modal</option>
+                <option value="inline">Inline</option>
+                <option value="bubble">Bubble</option>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </select>
+        </div>
+        <div>
+            <label for="language">Language</label>
+            <select name="language" id="language" class="settings">
+                <option value="">English</option>
+            </select>
+        </div>
+        <div>
+            <label for="demo">Demo</label>
+            <select name="demo" id="demo" class="settings">
+                <option value="select" selected>Select</option>
+                <option value="date" >Date</option>
+                <option value="datetime" >Date & Time</option>
+                <option value="time" >Time</option>
+            </select>
+        </div>
+        <!-- Demo configurator markup END -->
+        <!-- ------------------------------------------------------------------ -->
+
+    
+        <!-- Select demo markup -->
+        <div data-role="fieldcontain" class="demo-cont" id="demo_cont_select">
+            <label for="demo_select">Try Select</label>
+            <select name="Cities" id="demo_select" data-role="none">
+                <option value="">Please Select</option>
+                <option value="1">Atlanta</option>
+                <option value="2">Berlin</option>
+                <option value="3">Boston</option>
+                <option value="4">Chicago</option>
+                <option value="5">London</option>
+                <option value="6">Los Angeles</option>
+                <option value="7">New York</option>
+                <option value="8">Paris</option>
+                <option value="9">San Francisco</option>
+            </select>   
+        </div>
+    
+        <!-- Date demo markup -->
+        <div data-role="fieldcontain" class="demo-cont" id="demo_cont_date">
+            <label for="demo_date">Try Date</label>
+            <input type="text" id="demo_date" />  
+        </div>
+    
+        <!-- Date & Time demo markup -->
+        <div data-role="fieldcontain" class="demo-cont" id="demo_cont_datetime">
+            <label for="demo_datetime">Try Date & Time</label>
+            <input type="text" id="demo_datetime" />  
+        </div>
+    
+        <!-- Time demo markup -->
+        <div data-role="fieldcontain" class="demo-cont" id="demo_cont_time">
+            <label for="demo_time">Try Time</label>
+            <input type="text" id="demo_time" />  
+        </div>
+    
+    </div>
+</body>
+</html>
