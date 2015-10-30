@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<title>demo</title>
+	<style type="text/css">
+		body {
+			width: 100%;
+			font-family: Helvetica, tahoma, arial, sans-serif;
+			background-color: #fff;
+			color: #3f3f3f;
+		}
+		@media screen and (max-width: 320px) {
+			body{font-size: 14px;}
+		}
+		@media screen and (min-width: 321px) and (max-width: 413px) {
+			body{font-size: 16px;}
+		}
+		@media screen and (min-width: 414px) and (max-width: 639px) {
+			body{font-size: 17px;}
+		}
+		@media screen and (min-width: 640px) {
+			body{font-size: 18px;}
+		}
+
+		body, div{
+			margin: 0;
+			padding: 0;
+			border: none;
+			outline: none;
+		}
+
+		body {
+			width: 6.4rem;
+		}
+
+		.line {
+			width: 100%;
+		}
+
+		.line > div {
+			float: left;
+			margin: .5rem 0 0 .5rem;
+		}
+
+		.icon {
+			width: 1.4rem;
+			height: 1.4rem;
+			background-image: url(sprite.png);
+			background-repeat: no-repeat;
+			background-size: 1.4rem;
+		}
+
+		.icon-fix {
+			background: none;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.icon-fix:after {
+			content: '';
+			display: block;
+			width: 10000%;
+			height: 10000%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			background-image: url(sprite.png);
+			background-repeat: no-repeat;
+			background-size: 140rem;
+			-webkit-transform-origin: 0 0;
+			-webkit-transform: scale(.01);
+			transform-origin: 0 0;
+			transform: scale(.01);
+		}
+
+		.icon img {
+			display: none;
+		}
+
+		.icon-img {
+			background: none;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.icon-img img {
+			display: inline-block;
+			width: 100%;
+			position: absolute;
+			left: 0;
+		}
+
+		.icon1 {
+			background-position: 0 0;
+		}
+
+		.icon2 {
+			background-position: 0 -1.4rem;
+		}
+
+		.icon2:after {
+			background-position: 0 -140rem;
+		}
+
+		.icon3 {
+			background-position: 0 -2.8rem;
+		}
+
+		.icon3:after {
+			background-position: 0 -280rem;
+		}
+
+		.icon4 {
+			background-position: 0 -4.2rem;
+		}
+
+		.icon4:after {
+			background-position: 0 -420rem;
+		}
+
+		.icon5 {
+			background-position: 0 -5.6rem;
+		}
+
+		.icon5:after {
+			background-position: 0 -560rem;
+		}
+
+		.icon5 img {
+			top: -400%;
+		}
+
+		.icon6 {
+			background-position: 0 -7rem;
+		}
+
+		.icon6:after {
+			background-position: 0 -700rem;
+		}
+
+		.icon7 {
+			background-position: 0 -8.4rem;
+		}
+
+		.icon7:after {
+			background-position: 0 -840rem;
+		}
+
+		.icon8 {
+			background-position: 0 -9.8rem;
+		}
+
+		.icon8:after {
+			background-position: 0 -980em;
+		}
+	</style>
+	
+</head>
+<body>
+	<div class="container">
+		<div class="line">
+			<div class="icon icon1"></div>
+			<div class="icon icon2 icon-fix"></div>
+			<div class="icon icon3"></div>
+			<div class="icon icon4 icon-fix"></div>
+		</div>
+		<div class="line">
+			<div class="icon icon5 icon-img"><img src="sprite.png"></div>
+			<div class="icon icon6"></div>
+			<div class="icon icon7"></div>
+			<div class="icon icon8"></div>
+		</div>
+	</div>
+
+	<script>
+		(function () {
+			document.addEventListener('DOMContentLoaded', function () {
+				var html = document.documentElement;
+				var windowWidth = html.clientWidth;
+				console.log('windowWidth: ' + windowWidth);
+				html.style.fontSize = windowWidth / 6.4 + 'px';
+			}, false);
+		})();
+	</script>
+</body>
+</html>
