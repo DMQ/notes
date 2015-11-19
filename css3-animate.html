@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<hmtl>
+	<head>
+		<title>css3动画</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				border: none;
+			}
+			html, body{
+				font-size: 10px;
+				color: #fff;
+				background: #000;
+			}
+			ul, li, dl, dt, dd{
+				list-style-type: none;
+			}
+			.container{
+				font-size: 1.4rem;
+				width: 980px; 
+				margin: auto;
+			}
+			dl{
+				margin: 2em auto;
+			}
+			dd{
+				margin: 1rem 0;
+			}
+			.vertical-middle{
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+			.clearfix{
+				zoom: 1;
+			}
+			.clearfix:after{
+				content: '';
+				display: block;
+				height: 0;
+				visibility: hidden;
+				clear: both;
+			}
+			button{
+				display: block;
+				width: 9rem;
+				height: 2.5rem;
+				float: left;
+				margin: .7rem .5rem 0 0;
+				outline: none;
+				color: #fff;
+				border-radius: .2rem;
+				text-shadow: 0 -.1rem .1rem rgba(0, 0, 0, .25);
+				cursor: pointer;
+			}
+
+			.btn1{
+				background: #91bd09;
+				-webkit-box-shadow: 0 .1rem .3rem rgba(0, 0, 0, .6);
+						box-shadow: 0 .1rem .3rem rgba(0, 0, 0, .6);
+				border-bottom: .1rem solid rgba(0, 0, 0, .25);
+			}
+			.btn1:hover{
+				background: #7B9D0F;
+			}
+			.btn1:active{
+				-webkit-transform: translateY(.1rem);
+			}
+
+			.btn2{
+				border: solid 1px #3A8BA9;
+				background-image: -webkit-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+				background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(44,160,202)), color-stop(1, rgb(62,184,229)) );
+				background-image: linear-gradient(rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+				/* -webkit-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+						box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff; */
+			}
+			.btn2:active{
+				background-image: -webkit-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+				background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(62,184,229)), color-stop(1, rgb(44,160,202)) );
+				background-image: linear-gradient(rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+			}
+
+			.btn3{
+				background-image: -webkit-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+				background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(44,160,202)), color-stop(1, rgb(62,184,229)) );
+				background-image: linear-gradient(rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+
+				-webkit-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 3px 0px 0px #156785, 0px 5px 5px #999;
+						box-shadow: inset 0px 1px 0px #2ab7ec, 0px 3px 0px 0px #156785, 0px 5px 5px #999;
+			}
+			.btn3:active{
+				background-image: -webkit-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+				background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(62,184,229)), color-stop(1, rgb(44,160,202)) );
+				background-image: linear-gradient(rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+
+				-webkit-transform: translateY(.2rem);
+						transform: translateY(.2rem);
+
+				-webkit-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 1px 0px 0px #156785, 0px 3px 5px #999;
+						box-shadow: inset 0px 1px 0px #2ab7ec, 0px 1px 0px 0px #156785, 0px 3px 5px #999;
+			}
+		</style>
+		<script>
+			var $ = function (selector) {
+				return document.querySelectorAll(selector);
+			};
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<dl class="loading">
+				<dt>1、loading动画1</dt>
+				<dd>
+					<div class="loading1">
+						<div class="circle-container container1 vertical-middle">
+							<div class="circle1"></div>
+							<div class="circle2"></div>
+							<div class="circle3"></div>
+							<div class="circle4"></div>
+						</div>
+						<div class="circle-container container2 vertical-middle">
+							<div class="circle1"></div>
+							<div class="circle2"></div>
+							<div class="circle3"></div>
+							<div class="circle4"></div>
+						</div>
+					</div>
+					<style>
+						.loading1{
+							width: 20rem;
+							height: 20rem;
+							margin: auto;
+							position: relative;
+						}
+						.loading1 .circle-container{
+							width: 4rem;
+							height: 4rem;
+						}
+						.loading1 .container2{
+							-webkit-transform: rotateZ(45deg);
+									transform: rotateZ(45deg);
+						}
+						.loading1 .circle-container div{
+							width: 1rem;
+							height: 1rem;
+							border-radius: 100%;
+							background: #2FA1E8;
+							position: absolute;
+							-webkit-animation: loading1 1s linear infinite;
+									animation: loading1 1s ease-in-out infinite;
+						}
+
+						.loading1 .circle1{top: 0; left: 0;}
+						.loading1 .circle2{top: 0; right: 0; }
+						.loading1 .circle3{bottom: 0; right: 0;}
+						.loading1 .circle4{bottom: 0; left: 0; }
+
+						
+						.loading1 .container1 .circle1{
+							-webkit-animation-delay: -1s;
+									animation-delay: -.9s;
+						}
+						.loading1 .container2 .circle1{
+							-webkit-animation-delay: -.875s;
+									animation-delay: -.8s;
+						}
+						.loading1 .container1 .circle2{
+							-webkit-animation-delay: -.75s;
+									animation-delay: -.7s;
+						}
+						.loading1 .container2 .circle2{
+							-webkit-animation-delay: -.625s;
+									animation-delay: -.6s;
+						}
+						.loading1 .container1 .circle3{
+							-webkit-animation-delay: -.5s;
+									animation-delay: -.5s;
+						}
+						.loading1 .container2 .circle3{
+							-webkit-animation-delay: -.375s;
+									animation-delay: -.4s;
+						}
+						.loading1 .container1 .circle4{
+							-webkit-animation-delay: -.25s;
+									animation-delay: -.3s;
+						}
+						.loading1 .container2 .circle4{
+							-webkit-animation-delay: -.125s;
+									animation-delay: -.2s;
+						}
+
+						@-webkit-keyframes loading1{
+							0%, 100%{
+								-webkit-transform: scale(1.0);
+							}
+							80%{
+								-webkit-transform: scale(0.0);
+							}
+						}
+
+						@keyframes loading1{
+							0%, 100%{
+								-webkit-transform: scale(1.0);
+										transform: scale(1.0);
+							}
+							80%{
+								-webkit-transform: scale(0.0);
+										transform: scale(0.0);
+							}
+						}
+			
+						/*	
+						 * 动画延迟为负数，其实就是为了定格原点的初始状态为动画的某一帧
+						 * 所以要使动画连贯
+						 * 所有原点的初始状态值要根据一个完整的动画时长较长决定动画时长来平均分配
+						 * 才能保证均等时间内，每一帧动画都存在
+						 * 所以上述每个原点动画延迟 = 1s / 8（8个圆点）;
+						 */
+					</style>
+				</dd>
+			</dl>
+			<dl>
+				<dt>2、loading动画2</dt>
+				<dd>
+					<div class="loading2">
+						<div class="circle-container container1 vertical-middle">
+							<div class="circle1"></div>
+							<div class="circle2"></div>
+							<div class="circle3"></div>
+							<div class="circle4"></div>
+						</div>
+						<div class="circle-container container2 vertical-middle">
+							<div class="circle1"></div>
+							<div class="circle2"></div>
+							<div class="circle3"></div>
+							<div class="circle4"></div>
+						</div>
+					</div>
+					<style>
+						.loading2{
+							width: 20rem;
+							height: 20rem;
+							margin: auto;
+							position: relative;
+							-webkit-animation: loading2 1.5s linear infinite;
+									animation: loading2 1.5s linear infinite;
+						}
+						.loading2 .circle-container{
+							width: 4rem;
+							height: 4rem;
+						}
+						.loading2 .container2{
+							-webkit-transform: rotateZ(45deg);
+									transform: rotateZ(45deg);
+						}
+						.loading2 .circle-container div{
+							width: 1.4rem;
+							height: 1.4rem;
+							border-radius: 100%;
+							background: #2FA1E8;
+							position: absolute;
+						}
+
+						.loading2 .circle1{top: 0; left: 0;}
+						.loading2 .circle2{top: 0; right: 0; }
+						.loading2 .circle3{bottom: 0; right: 0;}
+						.loading2 .circle4{bottom: 0; left: 0; }
+
+						
+						.loading2 .container1 .circle1{
+							-webkit-transform: scale(.2);
+						}
+						.loading2 .container2 .circle1{
+							-webkit-transform: scale(.3);
+						}
+						.loading2 .container1 .circle2{
+							-webkit-transform: scale(.35);
+						}
+						.loading2 .container2 .circle2{
+							-webkit-transform: scale(.38);
+						}
+						.loading2 .container1 .circle3{
+							-webkit-transform: scale(.4);
+						}
+						.loading2 .container2 .circle3{
+							-webkit-transform: scale(.43);
+						}
+						.loading2 .container1 .circle4{
+							-webkit-transform: scale(.48);
+						}
+						.loading2 .container2 .circle4{
+							-webkit-transform: scale(.5);
+						}
+
+						@-webkit-keyframes loading2{
+							0%{
+								-webkit-transform: rotateZ(0deg);
+							}
+							100%{
+								-webkit-transform: rotateZ(360deg);
+							}
+						}
+
+						@keyframes loading2{
+							0%{
+								-webkit-transform: rotateZ(0deg);
+										transform: rotateZ(0deg);
+							}
+							100%{
+								-webkit-transform: rotateZ(360deg);
+										transform: rotateZ(360deg);
+							}
+						}
+
+
+					</style>
+				</dd>
+			</dl>
+			<dl>
+				<dt>3、loading动画3</dt>
+				<dd>
+					<div class="loading3">
+						<div class="loading-item loading-item1"></div>
+						<div class="loading-item loading-item2"></div>
+						<div class="loading-item loading-item3"></div>
+						<div class="loading-item loading-item4"></div>
+						<div class="loading-item loading-item5"></div>
+					</div>
+
+					<div class="loading3 loading-large">
+						<div class="loading-item loading-item1"></div>
+						<div class="loading-item loading-item2"></div>
+						<div class="loading-item loading-item3"></div>
+						<div class="loading-item loading-item4"></div>
+						<div class="loading-item loading-item5"></div>
+					</div>
+					<style>
+						.loading3 {
+							width: 24px;
+							height: 24px;
+							overflow: visible;
+							margin: 20px auto;
+						}
+
+						.loading3 .loading-item {
+							position: absolute;
+							width: 24px;
+							height: 24px;
+							opacity: 0;
+							-webkit-transform: rotate(225deg);
+							-o-transform: rotate(225deg);
+							-moz-transform: rotate(225deg);
+							transform: rotate(225deg);
+							-o-animation-name: loading3;
+							-moz-animation-name: loading3;
+							-webkit-animation-name:loading3;
+							animation-name: loading3;
+							-o-animation-duration: 4.4s;
+							-moz-animation-duration: 4.4s;
+							-webkit-animation-duration: 4.4s;
+							animation-duration: 4.4s;
+							-o-animation-iteration-count: infinite;
+							-moz-animation-iteration-count: infinite;
+							-webkit-animation-iteration-count: infinite;
+							animation-iteration-count: infinite;
+							-o-animation-timing-function: linear;
+							-moz-animation-timing-function: linear;
+							-webkit-animation-timing-function: linear;
+							animation-timing-function: linear
+						}
+
+						.loading3 .loading-item::after {
+							background-color: #0078D7;
+							border-radius: 50%;
+							width: 3px;
+							height: 3px;
+							position: absolute;
+							content: '';
+							left: 10%;
+							top: 10%;
+							-webkit-transform: scale(1);
+							-moz-transform: scale(1) rotate(0.02deg);
+							-ms-transform: scale(1) rotate(0.02deg)
+						}
+
+						.loading3 .loading-item1 {
+							-o-animation-delay: .96s;
+							-moz-animation-delay: .96s;
+							-webkit-animation-delay: .96s;/* animation-delay:.96s */
+						}
+						.loading3 .loading-item2 {
+							-o-animation-delay: .19s;
+							-moz-animation-delay: .19s;
+							-webkit-animation-delay: .19s;
+							animation-delay: .19s
+						}
+						.loading3 .loading-item3 {
+							-o-animation-delay: .38s;
+							-moz-animation-delay: .38s;
+							-webkit-animation-delay: .38s;
+							animation-delay: .38s
+						}
+						.loading3 .loading-item4 {
+							-o-animation-delay: .58s;
+							-moz-animation-delay: .58s;
+							-webkit-animation-delay: .58s;
+							animation-delay: .58s
+						}
+						.loading3 .loading-item5 {
+							-o-animation-delay: .77s;
+							-moz-animation-delay: .77s;
+							-webkit-animation-delay: .77s;
+							animation-delay: .77s
+						}
+
+						.loading3.loading-large, .loading3.loading-large .loading-item {
+							width: 40px;
+							height: 40px;
+						}
+
+						.loading3.loading-large .loading-item:after {
+							width: 4px;
+							height: 4px;
+						}
+
+						@-webkit-keyframes loading3 {
+							0% {
+								-webkit-transform: rotate(200deg);
+								opacity: 1;
+								-webkit-animation-timing-function: ease-out
+							}
+							7% {
+								-webkit-transform: rotate(345deg);
+								-webkit-animation-timing-function: linear
+							}
+							30% {
+								-webkit-transform: rotate(455deg);
+								-webkit-animation-timing-function: ease-in-out
+							}
+							40% {
+								-webkit-transform: rotate(760deg);
+								-webkit-animation-timing-function: linear
+							}
+							70% {
+								-webkit-transform: rotate(895deg);
+								opacity: 1;
+								-webkit-animation-timing-function: ease-out
+							}
+							73% {
+								-webkit-transform: rotate(955deg);
+								-webkit-animation-timing-function: ease-out;
+								opacity: 0
+							}
+							74% {
+								-webkit-transform: rotate(985deg);
+								opacity: 0
+							}
+							100% {
+								-webkit-transform: rotate(1005deg);
+								opacity: 0
+							}
+						}
+
+						@-moz-keyframes loading3 {
+							0% {
+								-moz-transform: rotate(200deg);
+								opacity: 1;
+								-moz-animation-timing-function: ease-out
+							}
+							7% {
+								-moz-transform: rotate(345deg);
+								-moz-animation-timing-function: linear
+							}
+							30% {
+								-moz-transform: rotate(455deg);
+								-moz-animation-timing-function: ease-in-out
+							}
+							40% {
+								-moz-transform: rotate(760deg);
+								-moz-animation-timing-function: linear
+							}
+							70% {
+								-moz-transform: rotate(895deg);
+								opacity: 1;
+								-moz-animation-timing-function: ease-out
+							}
+							73% {
+								-moz-transform: rotate(955deg);
+								-moz-animation-timing-function: ease-out;
+								opacity: 0
+							}
+							74% {
+								-moz-transform: rotate(985deg);
+								opacity: 0
+							}
+							100% {
+								-moz-transform: rotate(1005deg);
+								opacity: 0
+							}
+						}
+
+						@-o-keyframes loading3 {
+							0% {
+								-o-transform: rotate(200deg);
+								opacity: 1;
+								-o-animation-timing-function: ease-out
+							}
+							7% {
+								-o-transform: rotate(345deg);
+								-o-animation-timing-function: linear
+							}
+							30% {
+								-o-transform: rotate(455deg);
+								-o-animation-timing-function: ease-in-out
+							}
+							40% {
+								-o-transform: rotate(760deg);
+								-o-animation-timing-function: linear
+							}
+							70% {
+								-o-transform: rotate(895deg);
+								opacity: 1;
+								-o-animation-timing-function: ease-out
+							}
+							73% {
+								-o-transform: rotate(955deg);
+								-o-animation-timing-function: ease-out;
+								opacity: 0
+							}
+							74% {
+								-o-transform: rotate(985deg);
+								opacity: 0
+							}
+							100% {
+								-o-transform: rotate(1005deg);
+								opacity: 0
+							}
+						}
+
+						@keyframes loading3 {
+							0% {
+								transform: rotate(200deg);
+								opacity: 1;
+								animation-timing-function: ease-out
+							}
+							7% {
+								transform: rotate(345deg);
+								animation-timing-function: linear
+							}
+							30% {
+								transform: rotate(455deg);
+								animation-timing-function: ease-in-out
+							}
+							40% {
+								transform: rotate(760deg);
+								animation-timing-function: linear
+							}
+							70% {
+								transform: rotate(895deg);
+								opacity: 1;
+								animation-timing-function: ease-out
+							}
+							73% {
+								transform: rotate(955deg);
+								animation-timing-function: ease-out;
+								opacity: 0
+							}
+							74% {
+								transform: rotate(985deg);
+								opacity: 0
+							}
+							100% {
+								transform: rotate(1005deg);
+								opacity: 0
+							}
+						}
+
+					</style>
+				</dd>
+			</dl>
+			<dl>
+				<dt>4、圆形进度（实现1）</dt>
+				<dd class="percent-circle-wrap">
+					<div class="percent-circle percent0">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle percent10">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle percent20">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle percent30">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle percent40">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle percent50">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle percent60">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle percent70">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle percent80">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle percent90">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle percent100">
+						<div class="outer vertical-middle">
+							<div class="mask mask-lf"></div>
+							<div class="mask mask-rt"></div>
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+
+					<style>
+						.percent-circle-wrap{
+							background: #fff;
+							margin: 1rem 0;
+						}
+						.percent-circle{
+							width: 8.2rem;
+							height: 10rem;
+							position: relative;
+							display: inline-block;
+						}
+						.percent-circle .outer{
+							width: 4rem;
+							height: 4rem;
+							background: #73CF7C;
+							border-radius: 100%;
+						}
+						.percent-circle .inner{
+							width: 3.4rem;
+							height: 3.4rem;
+							background: #fff;
+							border-radius: 100%;
+						}
+						.percent-circle .mask{
+							width: 2rem;
+							height: 4rem;
+							background: #eee;
+							position: absolute;
+							left: 1rem;
+							top: 0;
+						}
+						.percent-circle .mask-lf{
+							-webkit-transform: translateX(-1.1rem);
+									transform: translateX(-1.1rem);
+							border-radius: 2rem 0 0 2rem;
+						}
+						.percent-circle .mask-rt{
+							-webkit-transform: rotate(0) translateX(1rem);
+									transform: rotate(0) translateX(1rem);
+							border-radius: 0 2rem 2rem 0;
+						}
+
+						.percent-circle.percent0 .outer{
+							background: #eee;
+						}
+
+						
+						.percent-circle.percent10 .mask-rt{
+							-webkit-transform: rotate(36deg) translateX(1.1rem);
+									transform: rotate(36deg) translateX(1.1rem);
+						}
+						.percent-circle.percent20 .mask-rt{
+							-webkit-transform: rotate(72deg) translateX(1.1rem);
+									transform: rotate(72deg) translateX(1.1rem);
+						}
+						.percent-circle.percent30 .mask-rt{
+							-webkit-transform: rotate(108deg) translateX(1.1rem);
+									transform: rotate(108deg) translateX(1.1rem);
+						}
+						.percent-circle.percent40 .mask-rt{
+							-webkit-transform: rotate(144deg) translateX(1.1rem);
+									transform: rotate(144deg) translateX(1.1rem);
+						}
+						.percent-circle.percent50 .mask-rt{
+							-webkit-transform: rotate(180deg) translateX(1.1rem);
+									transform: rotate(180deg) translateX(1.1rem);
+						}
+
+						.percent-circle.percent60 .mask-rt{
+							background: #73CF7C;
+							-webkit-transform: rotate(0deg) translateX(1.1rem);
+									transform: rotate(0deg) translateX(1.1rem);
+						}
+						.percent-circle.percent60 .mask-lf{
+							border-radius: 0 2rem 2rem 0;
+							-webkit-transform: rotate(216deg) translateX(1.1rem);
+									transform: rotate(216deg) translateX(1.1rem);
+						}
+
+						.percent-circle.percent70 .mask-rt{
+							background: #73CF7C;
+						}
+						.percent-circle.percent70 .mask-lf{
+							border-radius: 0 2rem 2rem 0;
+							-webkit-transform: rotate(252deg) translateX(1.1rem);
+									transform: rotate(252deg) translateX(1.1rem);
+						}
+
+						.percent-circle.percent80 .mask-rt{
+							background: #73CF7C;
+						}
+						.percent-circle.percent80 .mask-lf{
+							border-radius: 0 2rem 2rem 0;
+							-webkit-transform: rotate(288deg) translateX(1.1rem);
+									transform: rotate(288deg) translateX(1.1rem);
+						}
+
+						.percent-circle.percent90 .mask-rt{
+							background: #73CF7C;
+						}
+						.percent-circle.percent90 .mask-lf{
+							border-radius: 0 2rem 2rem 0;
+							-webkit-transform: rotate(324deg) translateX(1.1rem);
+									transform: rotate(324deg) translateX(1.1rem);
+						}
+
+						.percent-circle.percent100 .mask-rt, .percent-circle.percent100 .mask-lf{
+							display: none;
+						}
+					</style>
+				</dd>
+			</dl>
+			<dl>
+				<dt>5、圆形进度（实现2）</dt>
+				<dd class="percent-circle-wrap2">
+					<div class="percent-circle2 percent0">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle2 percent10">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle2 percent20">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle2 percent30">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle2 percent40">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle2 percent50">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle2 percent60">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle2 percent70">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle2 percent80">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle2 percent90">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					<div class="percent-circle2 percent100">
+						<div class="outer vertical-middle">
+							<div class="inner vertical-middle"></div>
+						</div>
+					</div>
+					
+
+					<style>
+						.percent-circle-wrap2{
+							background: #fff;
+							margin: 1rem 0;
+						}
+						.percent-circle2{
+							width: 8.2rem;
+							height: 10rem;
+							position: relative;
+							display: inline-block;
+						}
+						.percent-circle2 .outer{
+							width: 4rem;
+							height: 4rem;
+							background: #73CF7C;
+							border-radius: 100%;
+						}
+						.percent-circle2 .inner{
+							width: 3.4rem;
+							height: 3.4rem;
+							background: #fff;
+							border-radius: 100%;
+						}
+
+						.percent-circle2.percent0 .outer{
+							background: #eee;
+						}
+
+						.percent-circle2.percent10 .outer{
+							background-image: -webkit-linear-gradient(0deg, #eee 50%, transparent 50%, transparent),
+							                  -webkit-linear-gradient(-36deg, #73CF7C 50%, #eee 50%, #eee);
+							background-image: linear-gradient(90deg, #eee 50%, transparent 50%, transparent),
+							                  linear-gradient(126deg, #73CF7C 50%, #eee 50%, #eee);
+						}
+						.percent-circle2.percent20 .outer{
+							background-image: -webkit-linear-gradient(0deg, #eee 50%, transparent 50%, transparent),
+							                  -webkit-linear-gradient(-72deg, #73CF7C 50%, #eee 50%, #eee);
+							background-image: linear-gradient(90deg, #eee 50%, transparent 50%, transparent),
+							                  linear-gradient(162deg, #73CF7C 50%, #eee 50%, #eee);
+						}
+						.percent-circle2.percent30 .outer{
+							background-image: -webkit-linear-gradient(0deg, #eee 50%, transparent 50%, transparent),
+							                  -webkit-linear-gradient(-108deg, #73CF7C 50%, #eee 50%, #eee);
+							background-image: linear-gradient(90deg, #eee 50%, transparent 50%, transparent),
+							                  linear-gradient(198deg, #73CF7C 50%, #eee 50%, #eee);
+						}
+						.percent-circle2.percent40 .outer{
+							background-image: -webkit-linear-gradient(0deg, #eee 50%, transparent 50%, transparent),
+							                  -webkit-linear-gradient(-144deg, #73CF7C 50%, #eee 50%, #eee);
+							background-image: linear-gradient(90deg, #eee 50%, transparent 50%, transparent),
+							                  linear-gradient(234deg, #73CF7C 50%, #eee 50%, #eee);
+						}
+						.percent-circle2.percent50 .outer{
+							background-image: -webkit-linear-gradient(0deg, #eee 50%, transparent 50%, transparent),
+							                  -webkit-linear-gradient(-180deg, #73CF7C 50%, #eee 50%, #eee);
+							background-image: linear-gradient(90deg, #eee 50%, transparent 50%, transparent),
+							                  linear-gradient(270deg, #73CF7C 50%, #eee 50%, #eee);
+						}
+
+						.percent-circle2.percent60 .outer{
+							background-image: -webkit-linear-gradient(180deg, #73CF7C 50%, transparent 50%, transparent),
+							                  -webkit-linear-gradient(-36deg, #eee 50%, #73CF7C 50%, #73CF7C);
+							background-image: linear-gradient(-90deg, #73CF7C 50%, transparent 50%, transparent),
+							                  linear-gradient(126deg, #eee 50%, #73CF7C 50%, #73CF7C);
+						}
+						.percent-circle2.percent70 .outer{
+							background-image: -webkit-linear-gradient(180deg, #73CF7C 50%, transparent 50%, transparent),
+							                  -webkit-linear-gradient(-72deg, #eee 50%, #73CF7C 50%, #73CF7C);
+							background-image: linear-gradient(-90deg, #73CF7C 50%, transparent 50%, transparent),
+							                  linear-gradient(162deg, #eee 50%, #73CF7C 50%, #73CF7C);
+						}
+						.percent-circle2.percent80 .outer{
+							background-image: -webkit-linear-gradient(180deg, #73CF7C 50%, transparent 50%, transparent),
+							                  -webkit-linear-gradient(-108deg, #eee 50%, #73CF7C 50%, #73CF7C);
+							background-image: linear-gradient(-90deg, #73CF7C 50%, transparent 50%, transparent),
+							                  linear-gradient(198deg, #eee 50%, #73CF7C 50%, #73CF7C);
+						}
+						.percent-circle2.percent90 .outer{
+							background-image: -webkit-linear-gradient(180deg, #73CF7C 50%, transparent 50%, transparent),
+							                  -webkit-linear-gradient(-144deg, #eee 50%, #73CF7C 50%, #73CF7C);
+							background-image: linear-gradient(-90deg, #73CF7C 50%, transparent 50%, transparent),
+							                  linear-gradient(234deg, #eee 50%, #73CF7C 50%, #73CF7C);
+						}
+						.percent-circle2.percent100 .outer{
+							/* background-image: -webkit-linear-gradient(180deg, #73CF7C 50%, transparent 50%, transparent),
+							                  -webkit-linear-gradient(-180deg, #eee 50%, #73CF7C 50%, #73CF7C);
+							background-image: linear-gradient(-90deg, #73CF7C 50%, transparent 50%, transparent),
+							                  linear-gradient(270deg, #eee 50%, #73CF7C 50%, #73CF7C); */
+						}
+
+						
+					</style>
+				</dd>
+			</dl>
+			<dl>
+				<dt>6、翻转效果</dt>
+				<dd class="flip-wrap">
+					<div class="cardflip1">
+						<div class="card1">
+							<div class="front">前</div>
+							<div class="back">后</div>
+						</div>
+					</div>
+
+					<style>
+						.cardflip1{
+							width: 16rem;
+							height: 20rem;
+							position: relative;
+							display: inline-block;
+							-webkit-perspective: 600px;	/* 触发3D变换，值越小，视角越近，3D感越强 */
+									perspective: 600px;
+						}
+						.card1{
+							width: 100%;
+							height: 100%;
+							/* 由于父元素的perspective属性的3D变换只能作用于直接子元素， 使用该属性可让当前元素子元素保留3D变换*/
+							-webkit-transform-style: preserve-3d;	
+									transform-style: preserve-3d;
+
+							-webkit-transition: transform 1s;
+									transition: transform 1s;
+						}
+						.card1 div{
+							position: absolute;
+						    width: 100%;
+						    height: 100%;
+						    font-size: 8rem;
+						    text-align: center;
+						    line-height: 20rem;
+						    -webkit-backface-visibility: hidden;	/* 隐藏背面 */
+						    		backface-visibility: hidden;
+						}
+						.card1 .front{
+							background: #2FA1E8;
+						}
+						.card1 .back{
+							background: #73C048;
+							-webkit-transform: rotateY(180deg);
+									transform: rotateY(180deg);
+						}
+
+						.card1:hover{
+							-webkit-transform: rotateY(180deg);
+									transform: rotateY(180deg);
+						}
+					</style>
+
+					<div class="cardflip2">
+						<div class="card2">
+							<div class="front">前</div>
+							<div class="back">后</div>
+						</div>
+					</div>
+
+					<style>
+						.cardflip2{
+							width: 16rem;
+							height: 20rem;
+							position: relative;
+							display: inline-block;
+							margin-left: 10rem;
+							-webkit-perspective: 600px;	/* 触发3D变换，值越小，视角越近，3D感越强 */
+									perspective: 600px;
+							
+						}
+						.card2{
+							width: 100%;
+							height: 100%;
+							/* 由于父元素的perspective属性的3D变换只能作用于直接子元素， 使用该属性可让当前元素子元素保留3D变换*/
+							-webkit-transform-style: preserve-3d;	
+									transform-style: preserve-3d;
+
+							-webkit-transform-origin: left center;	/* 改变3D变换的中心 */
+									transform-origin: left center;
+
+							-webkit-transition: transform 1s;
+									transition: transform 1s;
+						}
+						.card2 div{
+							position: absolute;
+						    width: 100%;
+						    height: 100%;
+						    font-size: 8rem;
+						    text-align: center;
+						    line-height: 20rem;
+						    -webkit-backface-visibility: hidden;	/* 隐藏背面 */
+						    		backface-visibility: hidden;
+						}
+						.card2 .front{
+							background: #2FA1E8;
+						}
+						.card2 .back{
+							background: #73C048;
+							-webkit-transform: rotateY(180deg);
+									transform: rotateY(180deg);
+						}
+
+						.card2:hover{
+							-webkit-transform: translateX(100%) rotateY(180deg);
+									transform: translateX(100%) rotateY(180deg);
+						}
+					</style>
+
+					<div class="cube-wrap">
+						<div class="cube">
+							<div class="front">1</div>
+							<div class="back">6</div>
+							<div class="right">2</div>
+							<div class="left">5</div>
+							<div class="top">3</div>
+							<div class="bottom">4</div>
+						</div>
+					</div>
+
+					<div class="cube-controller">
+						<button class="btn-show-front btn1">show front</button>
+						<button class="btn-show-back btn2">show back</button>
+						<button class="btn-show-right btn3">show right</button>
+						<button class="btn-show-left btn1">show left</button>
+						<button class="btn-show-top btn2">show top</button>
+						<button class="btn-show-bottom btn3">show bottom</button>
+					</div>
+
+					<style>
+						.cube-wrap{
+							width: 20rem;
+							height: 20rem;
+							position: relative;
+							display: inline-block;
+							margin-left: 10rem;
+							-webkit-perspective: 600px;	/* 触发3D变换，值越小，视角越近，3D感越强 */
+									perspective: 600px;
+						}
+						.cube{
+							width: 100%;
+							height: 100%;
+							position: absolute;
+							/* 由于父元素的perspective属性的3D变换只能作用于直接子元素， 使用该属性可让当前元素子元素保留3D变换*/
+							-webkit-transform-style: preserve-3d;	
+									transform-style: preserve-3d;
+
+							-webkit-transform: translateZ(-10rem);	/* 内部元素拉伸会模糊，设置该值推回原来的视角 */
+									transform: translateZ(-10rem);
+
+							-webkit-transition: transform 1s;
+									transition: transform 1s;
+						}
+						.cube div{
+							width: 19.8rem;
+							height: 19.8rem;
+							border: .2rem solid #fff;
+							font-size: 8rem;
+							opacity: .8;
+							line-height: 19.8rem;
+							position: absolute;
+							text-align: center;
+						}
+						.cube .front{
+							background: #6DC6AF;
+							-webkit-transform: rotateY(0deg) translateZ(10rem);
+									transform: rotateY(0deg) translateZ(10rem);
+						}
+						.cube .back{
+							background: #ACAE40;
+							-webkit-transform: rotateX(180deg) translateZ(10rem);
+									transform: rotateX(180deg) translateZ(10rem);
+						}
+						.cube .right{
+							background: #8F47A8;
+							-webkit-transform: rotateY(90deg) translateZ(10rem);
+									transform: rotateY(90deg) translateZ(10rem);
+						}
+						.cube .left{
+							background: #0088ac;
+							-webkit-transform: rotateY(-90deg) translateZ(10rem);
+									transform: rotateY(-90deg) translateZ(10rem);
+						}
+						.cube .top{
+							background: #D7666D;
+							-webkit-transform: rotateX(90deg) translateZ(10rem);
+									transform: rotateX(90deg) translateZ(10rem);
+						}
+						.cube .bottom{
+							background: #92da29;
+							-webkit-transform: rotateX(-90deg) translateZ(10rem);
+									transform: rotateX(-90deg) translateZ(10rem);
+						}
+
+						.cube.show-front{
+							-webkit-transform: translateZ(-10rem) rotateY(0deg);
+						}
+						.cube.show-back{
+							-webkit-transform: translateZ(-10rem) rotateX(180deg);
+						}
+						.cube.show-right{
+							-webkit-transform: translateZ(-10rem) rotateY(-90deg);
+						}
+						.cube.show-left{
+							-webkit-transform: translateZ(-10rem) rotateY(90deg);
+						}
+						.cube.show-top{
+							-webkit-transform: translateZ(-10rem) rotateX(-90deg);
+						}
+						.cube.show-bottom{
+							-webkit-transform: translateZ(-10rem) rotateX(90deg);
+						}
+
+						.cube-controller{
+							display: inline-block;
+							height: 20rem;
+							width: 14rem;
+							margin-left: 4rem;
+							padding-left: 5rem;
+							background: #eee; 
+						}
+						
+					</style>
+
+					<script>
+						(function () {
+							/* 点击按钮控制立方体旋转 */
+							var cube = $('.cube')[0],
+								buttons = $('.cube-controller button'),
+								i, len;
+
+							for (i = 0, len = buttons.length; i < len; i++) {
+								buttons[i].addEventListener('click', function () {
+									var className = this.className.replace(/btn\-|\s.+/g, '');
+									cube.className = 'cube ' + className;
+								});
+							}
+						})();
+					</script>
+				</dd>
+			</dl>
+			<dl>
+				<dt>7、旋转跑马灯</dt>
+				<dd>
+					<div class="marquee-wrap">
+						<div class="marquee">
+							<div class="panel1">1</div>
+							<div class="panel2">2</div>
+							<div class="panel3">3</div>
+							<div class="panel4">4</div>
+							<div class="panel5">5</div>
+							<div class="panel6">6</div>
+							<div class="panel7">7</div>
+							<div class="panel8">8</div>
+						</div>
+					</div>
+
+					<div class="marquee-controller clearfix">
+						<button class="marquee-left btn1">&lt; left</button>
+						<button class="marquee-right btn2">right &gt;</button>
+					</div>
+
+					<style>
+						.marquee-wrap{
+							width: 22rem;
+							height: 14rem;
+							position: relative;
+							margin: 2rem auto;
+							-webkit-perspective: 1000px;	/* 触发3D变换，值越小，视角越近，3D感越强 */
+									perspective: 1000px;
+						}
+						.marquee{
+							width: 100%;
+							height: 100%;
+							position: absolute;
+							-webkit-transform-style: preserve-3d;
+									transform-style: preserve-3d;
+
+							-webkit-transform: translateZ(-266px);
+									transform: translateZ(-266px);
+						
+							-webkit-transition: transform 1s;
+									transition: transform 1s;
+						}
+						.marquee div{
+							width: 20rem;
+							height: 14rem;
+							position: absolute;
+							left: 0;
+							right: 0;
+							top: 0;
+							bottom: 0;
+							margin: auto;
+							opacity: .8;
+							font-size: 6rem;
+							text-align: center;
+							line-height: 14rem;
+						}
+
+						/* 须知：弧度的计算公式为： ( 2*PI / 360 ) * 角度，
+						 * 		 panelNum == 面板数
+						 * 		 panelWidth == 面板宽度
+						 *
+						 * 每个面板旋转的角度(rotateY)的 = 360deg / 面板数 = 360deg/8 = 45deg 
+						 * 视角拉深(translateZ) = 由上往下（是一个八边形）看每个面到中心点的距离 = 
+						 * r(距中点距离) = Math.round( (panelWidth / 2) /  Math.tan( (Math.PI * 2 / 360 ) * ( 360 / panelNum) / 2 ) )
+						 * 				 = 266px
+						 */
+						.marquee .panel1{
+							background: #ccc;
+							-webkit-transform: rotateY(0deg) translateZ(266px);
+									transform: rotateY(0deg) translateZ(266px);
+						}
+						.marquee .panel2{
+							background: #DB4B64;
+							-webkit-transform: rotateY(45deg) translateZ(266px);
+									transform: rotateY(45deg) translateZ(266px);
+						}
+						.marquee .panel3{
+							background: #AD08F2;
+							-webkit-transform: rotateY(90deg) translateZ(266px);
+									transform: rotateY(90deg) translateZ(266px);
+						}
+						.marquee .panel4{
+							background: #4ACA1E;
+							-webkit-transform: rotateY(135deg) translateZ(266px);
+									transform: rotateY(135deg) translateZ(266px);
+						}
+						.marquee .panel5{
+							background: #E6EA2D;
+							-webkit-transform: rotateY(180deg) translateZ(266px);
+									transform: rotateY(180deg) translateZ(266px);
+						}
+						.marquee .panel6{
+							background: #4878E8;
+							-webkit-transform: rotateY(225deg) translateZ(266px);
+									transform: rotateY(225deg) translateZ(266px);
+						}
+						.marquee .panel7{
+							background: #31D7EA;
+							-webkit-transform: rotateY(270deg) translateZ(266px);
+									transform: rotateY(270deg) translateZ(266px);
+						}
+						.marquee .panel8{
+							background: #AFEA50;
+							-webkit-transform: rotateY(315deg) translateZ(266px);
+									transform: rotateY(315deg) translateZ(266px);
+						}
+
+						.marquee-controller{
+							width: 20rem;
+							margin: 0 auto 0 auto;
+							padding-top: 1rem;
+						}
+					</style>
+
+					<script>
+						var marquee = $('.marquee')[0],
+							left = $('.marquee-left')[0],
+							right = $('.marquee-right')[0];
+
+						left.addEventListener('click', function () {
+							var deg = marquee.getAttribute('data-deg') || 0;
+
+							deg = parseInt(deg) + 45;
+
+							var value = 'translateZ(-266px) rotateY(' + deg + 'deg)';
+
+							var cssText = '-webkit-transform: ' + value + '; transform: ' + value + ';';
+
+							marquee.setAttribute('data-deg', deg);
+							marquee.style.cssText = cssText;
+						});
+
+						right.addEventListener('click', function () {
+							var deg = marquee.getAttribute('data-deg') || 0;
+
+							deg = parseInt(deg) - 45;
+
+							var value = 'translateZ(-266px) rotateY(' + deg + 'deg)';
+
+							var cssText = '-webkit-transform: ' + value + '; transform: ' + value + ';';
+
+							marquee.setAttribute('data-deg', deg);
+							marquee.style.cssText = cssText;
+						});
+					</script>
+				</dd>
+			</dl>
+			<dl>
+				<dt>8</dt>
+				<dd></dd>
+			</dl>
+		</div>
+	</body>
+</hmtl>
