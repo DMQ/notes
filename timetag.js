@@ -8,64 +8,129 @@ var glob = require(node_modules + 'glob');
 var filePath = 'E:/dev_tools/git/operate/WebContent/newguys/**/*.{html,css}';	// 要处理的文件
 var copyFilePath = 'E:/dev_tools/git/operate/WebContent/newguys/**/*-copy.{html,css}';	// 要删除的备份文件
 
-deletCopyFiles(copyFilePath).done(/*function (data) {
-	log('删除备份文件共处理',
-		data.count, '个，成功',
-		data.count - data.errCount,
-		'个，失败',
-		data.errCount,
-		'个\n'
-	);
+doIt();
+// reset();
 
-	glob(filePath, function (err, filesList) {
-		var count = 0;
-		var errCount = 0;
+function doIt() {
+	deletCopyFiles(copyFilePath).done(function (data) {
+		log('删除备份文件共处理',
+			data.count,
+			'个，成功',
+			data.successCount,
+			'个，过滤',
+			data.filterCount,
+			'个，失败',
+			data.errCount,
+			'个\n'
+		);
 
-		if (err) {
-			log('读取文件列表失败');
-			return ;
-		}
-		
-		filesList.forEach(function (file, index) {
-			preadFile(file, 'utf-8')
-				.then(function (fileObj) {
-					var fileCopyName = file.replace(/(?=\.[^.]+$)/g, '-copy');
+		glob(filePath, function (err, filesList) {
+			var count = 0;
+			var errCount = 0;
 
-					// 备份
-					return pwriteFile(fileCopyName, fileObj.fileData);
-				}, function () {
-					log('读取文件 ' + file + ' 失败');
-					count += 1;
-					errCount += 1;
+			if (err) {
+				log('读取文件列表失败');
+				return ;
+			}
+			
+			filesList.forEach(function (file, index) {
+				preadFile(file, 'utf-8')
+					.then(function (fileObj) {
+						var fileCopyName = file.replace(/(?=\.[^.]+$)/g, '-copy');
 
-					if (count == filesList.length) {
-						log('处理完毕：共', count, '个,', count - errCount, '个成功,', errCount, '个失败');
-					}
-				})
-				.then(function (fileObj) {
-					log('备份文件: ' + file + ' ==> ' + fileObj.fileName + ' 成功');
+						// 备份
+						return pwriteFile(fileCopyName, fileObj.fileData);
+					}, function () {
+						log('读取文件 ' + file + ' 失败');
+						count += 1;
+						errCount += 1;
 
-					// 添加时间戳
-					return timetagHandler(file, fileObj.fileData);
-				}, function (fileObj) {
-					log('备份文件 ' + file + '失败');
-				})
-				.then(function () {
-					log(file + ' 添加时间戳成功, index: ' + index);
-				}, function () {
-					log(file + ' 添加时间戳失败');
-					errCount += 1;
-				})
-				.finally(function () {
-					count += 1;
+						if (count == filesList.length) {
+							log('处理完毕：共', count, '个,', count - errCount, '个成功,', errCount, '个失败');
+						}
+					})
+					.then(function (fileObj) {
+						log('备份文件: ' + file + ' ==> ' + fileObj.fileName + ' 成功');
 
-					if (count == filesList.length) {
-						log('\n处理完毕：共', count, '个, 成功', count - errCount, '个, 失败', errCount, '个');
-					}
-				});
+						// 添加时间戳
+						return timetagHandler(file, fileObj.fileData);
+					}, function (fileObj) {
+						log('备份文件 ' + file + '失败');
+					})
+					.then(function () {
+						log(file + ' 添加时间戳成功, index: ' + index);
+					}, function () {
+						log(file + ' 添加时间戳失败');
+						errCount += 1;
+					})
+					.finally(function () {
+						count += 1;
+
+						if (count == filesList.length) {
+							log('\n处理完毕：共', count, '个, 成功', count - errCount, '个, 失败', errCount, '个');
+						}
+					});
+			});
 		});
 	});
-}*/);
+}
+
+// 从备份文件恢复
+function reset() {
+	deletCopyFiles(filePath, /-copy/g).done(function (data) {
+		log('删除备份文件共处理',
+			data.count,
+			'个，成功',
+			data.successCount,
+			'个，过滤',
+			data.filterCount,
+			'个，失败',
+			data.errCount,
+			'个\n'
+		);
+
+		glob(copyFilePath, function (err, filesList) {
+			var count = 0;
+			var errCount = 0;
+
+			if (err) {
+				log('读取文件列表失败');
+				return ;
+			}
+			
+			filesList.forEach(function (file, index) {
+				preadFile(file, 'utf-8')
+					.then(function (fileObj) {
+						var fileCopyName = file.replace(/-copy/g, '');
+
+						// 备份
+						return pwriteFile(fileCopyName, fileObj.fileData);
+					}, function () {
+						log('读取文件 ' + file + ' 失败');
+						count += 1;
+						errCount += 1;
+
+						if (count == filesList.length) {
+							log('处理完毕：共', count, '个,', count - errCount, '个成功,', errCount, '个失败');
+						}
+					})
+					.then(function (fileObj) {
+						log('从备份文件恢复: ' + file + ' ==> ' + fileObj.fileName + ' 成功');
+
+					}, function (fileObj) {
+						log('从备份文件恢复：' + file + '失败');
+					})
+					.finally(function () {
+						count += 1;
+
+						if (count == filesList.length) {
+							log('\n从备份文件恢复处理完毕：共', count, '个, 成功', count - errCount, '个, 失败', errCount, '个');
+						}
+					});
+			});
+		});
+	});
+}
 
 function timetagHandler(file, fileData) {
 	var cssReg = /\.css$/;
@@ -143,9 +208,10 @@ function pwriteFile(file, fileData) {
 }
 
 // 删除所有备份文件
-function deletCopyFiles(filePath) {
+function deletCopyFiles(filePath, filterReg) {
 	var def = Q.defer();
 	var count = 0;
+	var filterCount = 0;
 	var errCount = 0;
 
 	glob(filePath, function (err, filesList) {
@@ -154,15 +220,21 @@ function deletCopyFiles(filePath) {
 		}
 
 		if (!filesList.length) {
-			def.resolve({
-				'count': count,
-				'errCount': errCount
-			});
+			checkResolve(0);
 
 			return ;
 		}
 
 		filesList.forEach(function (file) {
+			if (filterReg && filterReg.test(file)) {
+				count += 1;
+				filterCount += 1;
+
+				checkResolve(filesList.length);
+
+				return ;
+			}
+
 			fs.unlink(file, function (err) {
 				count += 1;
 
@@ -171,15 +243,21 @@ function deletCopyFiles(filePath) {
 					log('删除备份文件 ' + file + ' 失败');
 				}
 
-				if (count == filesList.length) {
-					def.resolve({
-						'count': count,
-						'errCount': errCount
-					});
-				}
+				checkResolve(filesList.length);
 			});
 		});
 	});
+
+	function checkResolve(listLength) {
+		if (count == listLength) {
+			def.resolve({
+				'count': count,
+				'filterCount': filterCount,
+				'successCount': count - filterCount - errCount,
+				'errCount': errCount
+			});
+		}
+	}
 
 	return def.promise;
 }
