@@ -5,10 +5,10 @@ var glob = require(node_modules + 'glob');
 // var filePath = './**/*.{html,css}';	// 要处理的文件
 // var copyFilePath = './**/*-copy.{html,css}';	// 要删除的备份文件
 
-var filePath = 'F:/httpServer/newguys/**/*.{html,css}';	// 要处理的文件
-var copyFilePath = 'F:/httpServer/newguys/**/*-copy.{html,css}';	// 要删除的备份文件
+var filePath = 'E:/dev_tools/git/operate/WebContent/newguys/**/*.{html,css}';	// 要处理的文件
+var copyFilePath = 'E:/dev_tools/git/operate/WebContent/newguys/**/*-copy.{html,css}';	// 要删除的备份文件
 
-deletCopyFiles(copyFilePath).done(function (data) {
+deletCopyFiles(copyFilePath).done(/*function (data) {
 	log('删除备份文件共处理',
 		data.count, '个，成功',
 		data.count - data.errCount,
@@ -65,7 +65,7 @@ deletCopyFiles(copyFilePath).done(function (data) {
 				});
 		});
 	});
-});
+}*/);
 
 function timetagHandler(file, fileData) {
 	var cssReg = /\.css$/;
@@ -195,15 +195,23 @@ function addTimetag(str) {
 	var time = '' + year + month + date + hour + minute;
 	var reg = /_t\=[^\"\']*/;
 
+	var strArr = str.split('#');
+	var hash = strArr.length > 1 ? ('#' + strArr[1]) : '';
+	var returnStr = '';
+
+	str = strArr[0];
+
 	if (str.indexOf('?') > -1) {
 		if (reg.test(str)) {
-			return str.replace(reg, '_t=' + time);
+			returnStr = str.replace(reg, '_t=' + time) + hash;
 		} else {
-			return str += '&_t=' + time;
+			returnStr = str + '&_t=' + time + hash;
 		}
 	} else {
-		return str += '?_t=' + time;
+		returnStr = str + '?_t=' + time + hash;
 	}
+
+	return returnStr;
 }
 
 function addZero(num) {
