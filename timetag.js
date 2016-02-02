@@ -8,7 +8,7 @@ var glob = require(node_modules + 'glob');
 var filePath = 'E:/dev_tools/git/operate/WebContent/newguys/**/*.{html,css}';	// 要处理的文件
 var copyFilePath = 'E:/dev_tools/git/operate/WebContent/newguys/**/*-copy.{html,css}';	// 要删除的备份文件
 
-doIt();
+ doIt();
 // reset();
 
 function doIt() {
@@ -264,6 +264,10 @@ function deletCopyFiles(filePath, filterReg) {
 
 // 给路径添加时间戳
 function addTimetag(str) {
+	if (/^(#+|javascript|tel|email)/.test(str)) {
+		return str;
+	}
+	
 	var now = new Date();
 	var year = now.getFullYear();
 	var month = addZero(now.getMonth() + 1);
@@ -287,6 +291,10 @@ function addTimetag(str) {
 		}
 	} else {
 		returnStr = str + '?_t=' + time + hash;
+	}
+
+	if (!/^(http|\/)/.test(returnStr)) {
+		returnStr = '/operate/newguys/' + returnStr.replace(/^(\.+\/)+/, '');
 	}
 
 	return returnStr;
