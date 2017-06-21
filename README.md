@@ -13,3 +13,4 @@
 * [占位图利器 -- placehold](https://placehold.it/)
 * [js编译成app利器 -- fuse](https://www.fusetools.com/); [相关文章](http://www.tuicool.com/articles/NfyuY3i)
 * [设置网站图标favico.js](http://lab.ejci.net/favico.js/)
+* [短链服务](http://www.ft12.com/)
