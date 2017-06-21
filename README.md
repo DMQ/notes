@@ -3,9 +3,11 @@
 日常学习的一些有用小笔记
 
 ## 博客
+* [剖析Vue原理&实现双向绑定MVVM](https://segmentfault.com/a/1190000006599500)
 * [移动端web app自适应布局探索与总结](http://segmentfault.com/a/1190000003931773)
 * [web app遇到的一些坑及小技能（持续更新...）](http://segmentfault.com/a/1190000003932970)
 * [css编码规范](http://segmentfault.com/a/1190000003992270)
+* [遍历多叉树（递归、非递归广度优先、深度优先）](https://segmentfault.com/a/1190000003004435)
 
 ## 网站收录
 * [基于webpack的在线调试(vue)工具 -- webpackbin](http://www.webpackbin.com/EJsur-jpl)
