@@ -16,3 +16,15 @@
 * [js编译成app利器 -- fuse](https://www.fusetools.com/); [相关文章](http://www.tuicool.com/articles/NfyuY3i)
 * [设置网站图标favico.js](http://lab.ejci.net/favico.js/)
 * [短链服务](http://www.ft12.com/)
+
+
+短链接口（百度api）：
+```javascript
+$.ajax({
+ headers: {
+   'apikey': '0bcae0071cafdafadd3a85acd22493af'
+ },
+ type: 'GET',
+ url: '//apis.baidu.com/3023/shorturl/shorten?url_long=' + encodeURIComponent('http://baidu.com')
+})
+```
