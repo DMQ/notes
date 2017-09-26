@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>animate</title>
+    <style>
+        * {margin:0;padding:0;border:0;}
+    </style>
+</head>
+<body>
+    <div id="div1" style="width:200px;height:200px;background:#2a2;"></div>
+    <script>
+        var Tween = {
+            /**
+             * 匀速运动
+             * t：已经执行时间，b：初始位置，c：总距离，d: 总时间
+            */
+            linear: function(t, b, c, d) {
+                return t * c / d + b;   // v = c / d 是速度，t * v 是 t时间内经过的距离，加上初始距离b，等于t时间后到达的总距离
+            },
+
+            /**
+             * 二次缓动（二次方曲线 p(t) = t ^ 2）
+            */
+            quad: function(t, b, c, d) {
+                return c * (t / d) * (t / d) + b
+            }
+        };
+
+        var requestAnimationFrame = window.requestAnimationFrame || function(fn) { setTimeout(fn, 16) };
+
+        function animate(opt) {
+            var startTime = Date.now();
+            var duration = opt.duration;
+
+            (function ani() {
+                // var remaining = Math.max(0, startTime + duration - Date.now())  // 剩余时间
+                // var temp = duration == 0 ? 0 : remaining / duration;    // 剩余百分比
+                // var precent = 1 - temp;
+
+                var t = Math.min(Date.now() - startTime, duration);
+                var precent = duration == 0 ? 1 : t / duration;
+                var distance = Tween[opt.easing || 'linear'](t, opt.start, opt.end - opt.start, opt.duration)
+                console.log('t:', t)
+                console.log(distance)
+                                
+                opt.step && opt.step.call(opt, precent, distance);
+                if (precent == 1) {
+                    return ;
+                }
+                
+                requestAnimationFrame(ani)
+            })()
+        }
+
+        animate({
+            start: 0,
+            end: 200,
+            duration: 1000,
+            step: function(precent, distance) {
+                document.querySelector('#div1').style.width = distance + 'px'
+            }
+        })
+
+        animate({
+            start: 0,
+            end: 400,
+            easing: 'quad',
+            duration: 1000,
+            step: function(precent, distance) {
+                document.querySelector('#div1').style.marginLeft = distance + 'px'
+            }
+        })
+
+        animate({
+            start: 0,
+            end: 200,
+            duration: 1000,
+            easing: 'quad',
+            step: function(precent, distance) {
+                document.querySelector('#div1').style.height = distance + 'px'
+            }
+        })
+
+        
+
+    </script>
+</body>
+</html>
