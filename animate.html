@@ -25,7 +25,29 @@
              * 二次缓动（二次方曲线 p(t) = t ^ 2）
             */
             quad: function(t, b, c, d) {
-                return c * (t / d) * (t / d) + b
+                var x = t / d;
+
+                var percent = Math.pow(x, 2)
+
+                return c * percent + b
+            },
+            quadOut: function(t, b, c, d) {
+                return c * (- Math.pow( t/d - 1, 2) + 1) + b
+            },
+
+            quadInOut: function(t, b, c, d) {
+
+
+                return c * (- Math.pow( t/d - 300, 2) + 1) + b
+            },
+
+            /**
+             * 贝塞尔三次方
+            */
+            cubicBezierIn: function(t, b, c, d) {
+                t = t / d;  // 0 =< t <= 1
+                var p0
+                var y = p0 * Math.pow(1 - t, 3) + 3 * p1 * t * Math.pow(1 - t, 2) + 3 * p2 * Math.pow(t, 2) * (1 - t) + p3 * Math.pow(t, 3)
             }
         };
 
@@ -34,58 +56,49 @@
         function animate(opt) {
             var startTime = Date.now();
             var duration = opt.duration;
+            var subs = opt.subs || [];
+            var timer;
 
-            (function ani() {
-                // var remaining = Math.max(0, startTime + duration - Date.now())  // 剩余时间
-                // var temp = duration == 0 ? 0 : remaining / duration;    // 剩余百分比
-                // var precent = 1 - temp;
+            (function go() {
+                var past = Math.min(Date.now() - startTime, duration);
+                var percent = duration == 0 ? 1 : past / duration;
 
-                var t = Math.min(Date.now() - startTime, duration);
-                var precent = duration == 0 ? 1 : t / duration;
-                var distance = Tween[opt.easing || 'linear'](t, opt.start, opt.end - opt.start, opt.duration)
-                console.log('t:', t)
-                console.log(distance)
-                                
-                opt.step && opt.step.call(opt, precent, distance);
-                if (precent == 1) {
+                subs.forEach(function(sub) {
+                    var distance = Tween[sub.easing || opt.easing || 'linear'](past, sub.from, sub.to, duration)
+                    sub.step && sub.step(distance, percent)
+                })
+
+                if (percent == 1) {
+                    cancelAnimationFrame(timer)
                     return ;
                 }
-                
-                requestAnimationFrame(ani)
+                timer = requestAnimationFrame(go)
             })()
         }
 
         animate({
-            start: 0,
-            end: 200,
             duration: 1000,
-            step: function(precent, distance) {
-                document.querySelector('#div1').style.width = distance + 'px'
-            }
+            easing: 'quadOut',
+            subs: [{
+                from: 0,
+                to: 400,
+                step: function(distance, percent) {
+                    document.querySelector('#div1').style.transform = 'translate(' + distance + 'px, 0px)'
+                }
+            }, {
+                from: 0,
+                to: 200,
+                step: function(distance) {
+                    document.querySelector('#div1').style.width = distance + 'px'
+                }
+            }, {
+                from: 0,
+                to: 200,
+                step: function(distance) {
+                    document.querySelector('#div1').style.height = distance + 'px'
+                }
+            }]
         })
-
-        animate({
-            start: 0,
-            end: 400,
-            easing: 'quad',
-            duration: 1000,
-            step: function(precent, distance) {
-                document.querySelector('#div1').style.marginLeft = distance + 'px'
-            }
-        })
-
-        animate({
-            start: 0,
-            end: 200,
-            duration: 1000,
-            easing: 'quad',
-            step: function(precent, distance) {
-                document.querySelector('#div1').style.height = distance + 'px'
-            }
-        })
-
-        
-
     </script>
 </body>
 </html>
