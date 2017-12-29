@@ -91,7 +91,13 @@
                 step: function(distance) {
                     document.querySelector('#div1').style.width = distance + 'px'
                 }
-            }, {
+            }]
+        })
+
+        animate({
+            duration: 2000,
+            easing: 'quadOut',
+            subs: [{
                 from: 0,
                 to: 200,
                 step: function(distance) {
