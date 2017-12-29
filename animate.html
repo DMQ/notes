@@ -7,11 +7,199 @@
     <title>animate</title>
     <style>
         * {margin:0;padding:0;border:0;}
+        ul {list-style: none}
+        .wrapper {
+            padding: 10px 30px;
+        }
+        .go-btn {
+            background: #86c927;
+            color: #fff;
+            font-size: 14px;
+            padding: 10px 20px;
+            margin: 10px 10px;
+            border-radius: 8px;
+            outline: none;
+            cursor: pointer;
+        }
+        .ball-list li{
+            margin-top: 30px;
+        }
+        .ball-list li p {
+            margin-bottom: 10px;
+        }
+        .ball {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background: #2a2;
+            border-radius:100%;
+            cursor: pointer;
+            left: 0px;
+            margin-bottom: 2px;
+        }
+
+        .ball-css {
+            transition: all 1.5s cubic-bezier(0.42,0,0.58,1);
+            left: 800px;
+        }
+
+        #bezier-canvas {
+            border: 1px solid #e8e8e8;
+        }
     </style>
 </head>
 <body>
-    <div id="div1" style="width:200px;height:200px;background:#2a2;"></div>
+    <div class="wrapper">
+        <canvas id="bezier-canvas" width="150" height="150"></canvas>
+        <!-- <button class="go-btn">Go</button> -->
+        <ul class="ball-list">
+           <li>
+                <p>bezierCustom</p>
+               <div class="ball" data-timing="bezierCustom"></div>
+               <div class="ball" data-timing="bezierCustom"></div>
+           </li> 
+           <li>
+               <p>linear</p>
+                <div class="ball" data-timing="linear"></div>
+           </li> 
+           <li>
+                <p>bezierLinear</p>
+               <div class="ball" data-timing="bezierLinear"></div>
+           </li> 
+           <li>
+                <p>bezierEase</p>
+               <div class="ball" data-timing="bezierEase"></div>
+           </li> 
+           <li>
+                <p>bezierEaseIn</p>
+               <div class="ball" data-timing="bezierEaseIn"></div>
+           </li> 
+           <li>
+               <p>quad</p>
+                <div class="ball" data-timing="quad"></div>
+           </li> 
+           <li>
+                <p>bezierEaseOut</p>
+               <div class="ball" data-timing="bezierEaseOut"></div>
+           </li> 
+           <li>
+               <p>quadOut</p>
+                <div class="ball" data-timing="quadOut"></div>
+           </li> 
+           <li>
+                <p>bezierEaseInOut</p>
+               <div class="ball" data-timing="bezierEaseInOut"></div>
+           </li> 
+           <li>
+               <p>quadInOut</p>
+                <div class="ball" data-timing="quadInOut"></div>
+           </li>
+        </ul>
+    </div>
     <script>
+        function bezier(points, percent) {
+            var len = points.length
+
+            if (len < 2) return // 至少两个点
+
+
+            // 计算公式的多项式常数（杨辉三角规律）
+
+            var c_n_k = calcYHTriangle(len);
+            var x = 0, y = 0;
+            var temp;
+
+            // 遍历控制点
+            for (var j = 0; j < len; j++) {
+                temp = (c_n_k[j] * Math.pow((1 - percent), (len - 1) - j) * Math.pow(percent, j))
+                x += temp * points[j].x
+                y += temp * points[j].y
+            }
+
+            return {x: x, y: y}
+        }
+
+
+        // 贝塞尔曲线公式多项式系数常数符合杨辉三角规律
+        // 杨辉三角: https://baike.baidu.com/item/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92
+
+        // 通过第i行，j列的数字等于 第i-1行 第j-1列 + 第j列数字的和
+        // 的特性，计算杨辉三角n层的数据（贝塞尔公式的每一项的常数项系数）
+        function calcYHTriangle(n) {
+            if (n == 1) return [1]
+
+            var prev;
+            var arr = [1, 1];   // 第二层的数据
+
+            // 第三层开始遍历
+            for (var i = 3; i <= n; i++) {
+
+                // 拷贝上一层的数据
+                prev = arr.slice(0)
+
+                // 第一个值永远是1
+                arr[0] = 1
+                // 当前层的第j个位置的值等于上一层的j-1位置 + j位置的值
+                // arr[j] = prev[j - 1] + prev[j]
+                for (var j = 1; j < i - 1; j++) {
+                    arr[j] = prev[j - 1] + prev[j]
+                }
+
+                // 最后一个值永远是1
+                arr.push(1)
+            }
+
+            return arr
+        }
+
+        // 使用二分法，根据X的值，求出对应的t
+        function getTForX(points, x, epsilon) {
+            var t0 = 0.0
+            var t1 = 1.0
+            var t2 = 0.5
+            var x1;
+            var i = 0;
+
+            // var maxRound = 20
+
+            if (x == t0 || x == t1) {
+                return x
+            }
+
+            while(t0 < t1/* && i < maxRound*/) {
+                x1 = bezier(points, t2).x
+
+                if (Math.abs(x1 - x) < epsilon) {
+                    // return t2
+                    break;
+                }
+
+                if (x1 > x) {
+                    t1 = t2
+                } else {
+                    t0 = t2
+                }
+
+                t2 = t0 + (t1 - t0) / 2
+
+                i++
+            }
+
+            console.log('loop times:', i, 'x:'+x, 'x1:'+x1, 'result: ' + (x - x1))
+
+            return t2
+        }
+
+        function cubicBezier(x1, y1, x2, y2) {
+            var points = [{x:0, y:0}, {x:x1, y:y1}, {x:x2, y:y2}, {x:1, y:1}]
+
+            return function(x) {
+                var t = getTForX(points, x, 0.001)
+                return bezier(points, t).y
+            }
+        }
+
+
         var Tween = {
             /**
              * 匀速运动
@@ -25,30 +213,71 @@
              * 二次缓动（二次方曲线 p(t) = t ^ 2）
             */
             quad: function(t, b, c, d) {
-                var x = t / d;
-
-                var percent = Math.pow(x, 2)
-
-                return c * percent + b
+                return c * (t / d) * (t / d) + b
             },
+
             quadOut: function(t, b, c, d) {
-                return c * (- Math.pow( t/d - 1, 2) + 1) + b
+                return c * (-Math.pow(t / d - 1, 2) + 1) + b
             },
 
             quadInOut: function(t, b, c, d) {
+                t = t / d * 2
+
+                // 时间一半之前使用quad的公式，加速
+                if (t < 1) {
+                    // 位移只能取一半
+                    return (c * t * t) / 2 + b;
+                }
+
+                // 时间一半之后用quadOut公式，减速
+                // return -c / 2 * ((--t) * (t-2) - 1) + b;
+                return c / 2 + c * (-Math.pow(t - 1 - 1, 2) + 1) / 2 + b
 
 
-                return c * (- Math.pow( t/d - 300, 2) + 1) + b
+                // // 通俗易懂版本
+                // if (t / d < 0.5) {
+                //     return this.quad(t, b, c / 2, d / 2)
+                // }
+
+                // return this.quadOut(t - d / 2, c / 2 + b, c / 2, d / 2)
             },
 
-            /**
-             * 贝塞尔三次方
-            */
-            cubicBezierIn: function(t, b, c, d) {
-                t = t / d;  // 0 =< t <= 1
-                var p0
-                var y = p0 * Math.pow(1 - t, 3) + 3 * p1 * t * Math.pow(1 - t, 2) + 3 * p2 * Math.pow(t, 2) * (1 - t) + p3 * Math.pow(t, 3)
-            }
+            bezierLinear: function(t, b, c, d) {
+                var point = bezier([{x:0, y:0}, {x:1, y:1}], t / d)
+
+                return point.x * c + b
+            },
+
+            bezierEase: function(t, b, c, d) {
+                var point = bezier([{x:0, y:0}, {x:0.25, y:0.1}, {x:0.25, y:1}, {x:1, y:1}], t / d)
+
+                return point.y * c + b
+            },
+
+            bezierEaseIn: function(t, b, c, d) {
+                var point = bezier([{x:0, y:0}, {x:0.42, y:0}, {x:1, y:1}, {x:1, y:1}], t / d)
+
+                return point.y * c + b
+            },
+
+            bezierEaseOut: function(t, b, c, d) {
+                var point = bezier([{x:0, y:0}, {x:0, y:0}, {x:0.58, y:1}, {x:1, y:1}], t / d)
+
+                return point.y * c + b
+            },
+
+            bezierEaseInOut: function(t, b, c, d) {
+                var point = bezier([{x:0, y:0}, {x:0.42, y:0}, {x:0.58, y:1}, {x:1, y:1}], t / d)
+
+                return point.y * c + b
+            },
+
+            bezierCustom: (function() {
+                var bezierFn = cubicBezier(0.5,1.56,0.99,0)
+                return function(t, b, c, d) {
+                    return bezierFn(t / d) * c + b
+                }
+            })()
         };
 
         var requestAnimationFrame = window.requestAnimationFrame || function(fn) { setTimeout(fn, 16) };
@@ -76,35 +305,55 @@
             })()
         }
 
-        animate({
-            duration: 1000,
-            easing: 'quadOut',
-            subs: [{
-                from: 0,
-                to: 400,
-                step: function(distance, percent) {
-                    document.querySelector('#div1').style.transform = 'translate(' + distance + 'px, 0px)'
-                }
-            }, {
-                from: 0,
-                to: 200,
-                step: function(distance) {
-                    document.querySelector('#div1').style.width = distance + 'px'
-                }
-            }]
+        var goBtn = document.querySelector('.go-btn')
+        var $balls = document.querySelectorAll('.ball')
+        var $canvas = document.querySelector('#bezier-canvas')
+        var ctx = $canvas.getContext('2d')
+
+
+        var prevDis = 0
+        $balls.forEach(function($ball) {
+            $ball.addEventListener('click', function() {
+                ctx.clearRect(0,0,1000,1000)
+                var cssBall = $ball.nextElementSibling
+
+                cssBall && cssBall.setAttribute('class', 'ball')
+
+                setTimeout(function() {
+                    cssBall && cssBall.setAttribute('class', 'ball ball-css')
+
+                    animate({
+                        duration: 1500,
+                        easing: $ball.getAttribute('data-timing'),
+                        subs: [{
+                            from: 0,
+                            to: 800,
+                            step: function(distance, percent) {
+                                // console.log('dis:', distance)
+                                prevDis = distance
+
+                                $ball.style.transform = 'translateX(' + distance + 'px)'
+                            }
+                        }]
+                    })
+                })
+            })
         })
 
-        animate({
-            duration: 2000,
-            easing: 'quadOut',
-            subs: [{
-                from: 0,
-                to: 200,
-                step: function(distance) {
-                    document.querySelector('#div1').style.height = distance + 'px'
+
+        function sleep(time) {
+            console.log('sleep ' + time + 'ms start')
+
+            var now = Date.now()
+            while(1) {
+                if (Date.now() - now >= time) {
+                    break
                 }
-            }]
-        })
+            }
+            console.log('sleep ' + time + 'ms end')
+        }
+        
+
     </script>
 </body>
 </html>
